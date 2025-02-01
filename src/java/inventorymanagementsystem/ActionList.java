@@ -6,6 +6,7 @@ public class ActionList {
     private static HashMap<String, Action> actions = new HashMap<String, Action>() {{
         put("exit", new ExitAction());
         put("inventory", new InventoryAction());
+        put("inv", new InventoryAction());
         put("list", new ListAction());
     }};
 
