@@ -1,4 +1,8 @@
+package action;
 import java.util.List;
+
+import inventory.InventoryActions;
+import inventory.InventoryRetrievalException;
 
 public interface Action {
     public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException, InventoryRetrievalException;

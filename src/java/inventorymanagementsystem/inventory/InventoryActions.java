@@ -1,3 +1,4 @@
+package inventory;
 public class InventoryActions {
     private static InventoryList inventoryList = InventoryList.getInstance();
 

@@ -1,3 +1,4 @@
+package inventory;
 public class Inventory {
     private String[][] items;
     private int rows;
