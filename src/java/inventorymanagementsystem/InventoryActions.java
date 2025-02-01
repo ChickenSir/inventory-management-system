@@ -41,6 +41,10 @@ public class InventoryActions {
         return invTo.add(invFrom.remove(s));
     }
 
+    public static boolean delete(String name) {
+        return inventoryList.removeInventory(name);
+    }
+
     public static void clear(String name) {
         inventoryList.getInventory(name).clear();
     }

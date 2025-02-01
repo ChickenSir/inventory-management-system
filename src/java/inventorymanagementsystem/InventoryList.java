@@ -23,6 +23,15 @@ public class InventoryList {
         inventories.put(name, inv);
     }
 
+    public boolean removeInventory(String name) {
+        Inventory inv = inventories.get(name);
+
+        if (inv == null) return false;
+
+        inventories.remove(name);
+        return true;
+    }
+
     public HashMap<String, Inventory> getList() {
         return inventories;
     }

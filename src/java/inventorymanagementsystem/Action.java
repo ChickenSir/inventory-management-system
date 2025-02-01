@@ -150,6 +150,21 @@ class InventoryAction implements Action {
 
                 break;
             }
+            case "delete": {
+                if (args.size() != 2) {
+                    throw new ActionArgumentException(action, 1);
+                }
+
+                Boolean deleted = InventoryActions.delete(args.get(1));
+
+                if (deleted) {
+                    output = "[SYSTEM] Deleted inventory '" + args.get(1) + "'";
+                } else {
+                    output = "[ERROR] Inventory '" + args.get(1) + "' does not exist";
+                }
+
+                break;
+            }
             case "clear": {
                 if (args.size() != 2) {
                     throw new ActionArgumentException(action, 1);
