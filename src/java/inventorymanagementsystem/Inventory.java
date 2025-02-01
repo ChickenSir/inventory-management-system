@@ -24,6 +24,15 @@ public class Inventory {
         return true;
     }
 
+    public boolean add(String s, int r, int c) {
+        if (isFull()) return false;
+        if (items[r][c] == null) return false;
+
+        items[r][c] = s;
+
+        return true;
+    }
+
     public boolean isFull() {
         return nextRow == rows;
     }
