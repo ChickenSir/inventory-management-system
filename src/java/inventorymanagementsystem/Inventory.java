@@ -55,6 +55,9 @@ public class Inventory {
         for (int i = 0; i < items.length; i++) {
             for (int j = 0; j < items[i].length; j++) {
                 if (items[i][j].equals(s)) {
+                    if (i < nextRow) nextRow = i;
+                    if (j < nextColumn) nextColumn = j;
+                    
                     items[i][j] = null;
                     return items[i][j];
                 }
