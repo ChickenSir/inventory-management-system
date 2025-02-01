@@ -106,6 +106,24 @@ class InventoryAction implements Action {
 
                 break;
             }
+            case "transfer": {
+                if (args.size() != 4) {
+                    throw new ActionArgumentException(action, 3);
+                }
+
+                String from = args.get(1);
+                String to = args.get(2);
+                String str = args.get(3);
+                Boolean transferred = InventoryActions.transfer(from, to, str);
+
+                if (transferred) {
+                    output = "[SYSTEM] Tranferred '" + str + "' from '" + from + "' to '" + to + "'"; 
+                } else {
+                    output = "[ERROR] Cannot transfer '" + str + "'";
+                }
+
+                break;
+            }
         }
 
         return output;
