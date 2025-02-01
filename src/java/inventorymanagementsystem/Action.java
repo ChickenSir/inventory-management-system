@@ -32,10 +32,11 @@ class ListAction implements Action {
             + "    - add: Add a string to an inventory\n"
             + "    - remove: Remove a string from an inventory\n"
             + "    - transfer: Transfer a string between two inventories\n"
+            + "    - delete: Delete an inventory with the specified name\n"
             + "    - clear: Clear an inventory\n"
             + "    - fill: Fill an inventory\n"
-            + " - help: Display details of an action\n"
-            + " - exit: Exit the program";
+            + " - exit: Exit the program\n\n"
+            + "Entering an action name will show its list of arguments (if any)";
         return output;
     }
 }
@@ -44,7 +45,17 @@ class InventoryAction implements Action {
     @Override
     public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException {
         if (args.size() < 1) {
-            throw new ActionArgumentException("inventory", 1);
+            return "Inventory:\n"
+                    + " - inventory create/list/display/add/remove/transfer/delete/clear/fill\n"
+                    + " - inventory create rows columns name\n"
+                    + " - inventory list\n"
+                    + " - inventory display name\n"
+                    + " - inventory add string name\n"
+                    + " - inventory remove string name\n"
+                    + " - inventory transfer from to string\n"
+                    + " - inventory delete name\n"
+                    + " - inventory clear name\n"
+                    + " - inventory fill name\n";
         }
 
         // Get the first argument from the action
