@@ -21,4 +21,12 @@ public class InventoryActions {
     public static String display(String name) {
         return inventoryList.getInventory(name).toString();
     }
+
+    public static boolean add(String name, String s) {
+        return inventoryList.getInventory(name).add(s);
+    }
+
+    public static boolean add(String name, String s, int r, int c) {
+        return inventoryList.getInventory(name).add(s, r, c);
+    }
 }

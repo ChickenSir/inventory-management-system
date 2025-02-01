@@ -29,7 +29,7 @@ class InventoryAction implements Action {
         String output = "";
 
         switch (action) {
-            case "create":
+            case "create": {
                 if (args.size() > 4 || args.size() < 3) {
                     throw new ActionArgumentException(action, 4);
                 }
@@ -47,6 +47,7 @@ class InventoryAction implements Action {
                 InventoryActions.create(name, rows, columns);
                 output = "[SYSTEM] Succesfully created inventory '" + name + "'";
                 break;
+            }
             case "list":
                 if (args.size() > 1) {
                     throw new ActionArgumentException(action, 0);
@@ -62,6 +63,32 @@ class InventoryAction implements Action {
                 output += "[SYSTEM] Displaying " + args.get(1) + "\n";
                 output += InventoryActions.display(args.get(1));
                 break;
+            case "add": {
+                if (args.size() < 3 || args.size() > 5) {
+                    throw new ActionArgumentException(action, 2);
+                }
+
+                String name = args.get(2);
+                String str = args.get(1);
+                Boolean added;
+
+                if (args.size() == 3) {
+                    added = InventoryActions.add(name, str);
+                } else {
+                    int row = Integer.valueOf(args.get(3));
+                    int column = Integer.valueOf(args.get(4));
+
+                    added = InventoryActions.add(name, str, row, column);
+                }
+
+                if (added) {
+                    output = "[SYSTEM] Added '" + str + "' to '" + name + "' ";
+                } else {
+                    output = "[ERROR] Inventory '" + name + "' is full or slot is occupied";
+                }
+
+                break;
+            }
         }
 
         return output;
