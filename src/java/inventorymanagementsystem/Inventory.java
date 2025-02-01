@@ -1,14 +1,31 @@
 public class Inventory {
     private String[][] items;
-    private int nextRow;
-    private int nextColumn;
-    private int size;
+    private int rows;
+    private int columns;
+    public int size;
 
-    public Inventory(int rows, int columns) {
-        items = new String[rows][columns];
-        nextRow = 0;
-        nextColumn = 0;
-        size = rows * columns;
+    private int nextRow = 0;
+    private int nextColumn = 0;
+
+    public Inventory(int r, int c) {
+        items = new String[r][c];
+        rows = r;
+        columns = c;
+        size = r * c;
+    }
+
+    public boolean add(String s) {
+        if (isFull()) return false;
+
+        items[nextRow][nextColumn] = s;
+        if (nextColumn == columns - 1) nextRow++;
+        nextColumn = (nextColumn + 1) % columns;
+
+        return true;
+    }
+
+    public boolean isFull() {
+        return nextRow == rows;
     }
 
     public String toString() {
