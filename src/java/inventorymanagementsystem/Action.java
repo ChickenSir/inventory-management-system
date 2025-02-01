@@ -14,7 +14,31 @@ class ExitAction implements Action {
 
         return null;
     }
-} 
+}
+
+class ListAction implements Action {
+    @Override
+    public String run(List<String> args) throws ActionArgumentException {
+        if (args.size() != 0) {
+            throw new ActionArgumentException("exit", 0);
+        }
+
+        String output = "=====[List of Actions]=====\n\n"
+            + " - list: Lists all actions\n"
+            + " - inventory\n"
+            + "    - create: Create an inventory with a specified size and name\n"
+            + "    - list: List all inventories\n"
+            + "    - display: Display the contents of an inventory\n"
+            + "    - add: Add a string to an inventory\n"
+            + "    - remove: Remove a string from an inventory\n"
+            + "    - transfer: Transfer a string between two inventories\n"
+            + "    - clear: Clear an inventory\n"
+            + "    - fill: Fill an inventory\n"
+            + " - help: Display details of an action\n"
+            + " - exit: Exit the program";
+        return output;
+    }
+}
 
 class InventoryAction implements Action {
     @Override
