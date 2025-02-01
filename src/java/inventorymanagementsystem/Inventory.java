@@ -18,11 +18,13 @@ public class Inventory {
     public boolean add(String s) {
         if (isFull()) return false;
 
+        // Add string to current slot if it is available
         if (items[nextRow][nextColumn] == null) {
             items[nextRow][nextColumn] = s;
             if (nextColumn == columns - 1) nextRow++;
             nextColumn = (nextColumn + 1) % columns;
         } else {
+            // Use linear probing to find an available slot
             while (items[nextRow][nextColumn] != null) {
                 if (nextColumn == columns - 1) nextRow++;
                 nextColumn = (nextColumn + 1) % columns;
@@ -39,6 +41,7 @@ public class Inventory {
         if (isFull()) return false;
         if (items[r][c] != null) return false;
 
+        // Add string to specified spot
         items[r][c] = s;
         totalItems++;
 
@@ -48,6 +51,7 @@ public class Inventory {
     public String remove(String s) {
         if (totalItems == 0) return null;
 
+        // Find and remove specified string
         for (int i = 0; i < items.length; i++) {
             for (int j = 0; j < items[i].length; j++) {
                 if (items[i][j].equals(s)) {
