@@ -29,4 +29,19 @@ public class InventoryActions {
     public static boolean add(String name, String s, int r, int c) {
         return inventoryList.getInventory(name).add(s, r, c);
     }
+
+    public static String remove(String name, String s) {
+        return inventoryList.getInventory(name).remove(s);
+    }
+
+    public static boolean transfer(String from, String to, String s) {
+        Inventory invFrom = inventoryList.getInventory(from);
+        Inventory invTo = inventoryList.getInventory(to);
+
+        return invTo.add(invFrom.remove(s));
+    }
+
+    public static void clear(String name) {
+        inventoryList.getInventory(name).clear();
+    }
 }
