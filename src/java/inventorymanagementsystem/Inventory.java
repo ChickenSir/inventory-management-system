@@ -45,6 +45,21 @@ public class Inventory {
         return true;
     }
 
+    public String remove(String s) {
+        if (totalItems == 0) return null;
+
+        for (int i = 0; i < items.length; i++) {
+            for (int j = 0; j < items[i].length; j++) {
+                if (items[i][j].equals(s)) {
+                    items[i][j] = null;
+                    return items[i][j];
+                }
+            }
+        }
+
+        return null;
+    }
+
     public void clear() {
         items = new String[rows][columns];
         nextRow = 0;
