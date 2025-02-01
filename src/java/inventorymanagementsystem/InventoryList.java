@@ -19,8 +19,13 @@ public class InventoryList {
         return inventories.get(name);
     }
 
-    public void addInventory(String name, Inventory inv) {
+    public boolean addInventory(String name, Inventory inv) {
+        Inventory inventory =  inventories.get(name);
+
+        if (inventory != null) return false;
+
         inventories.put(name, inv);
+        return true;
     }
 
     public boolean removeInventory(String name) {

@@ -76,8 +76,14 @@ class InventoryAction implements Action {
                     name = "Inventory" + (int)(Math.random() * 10000);
                 }
 
-                InventoryActions.create(name, rows, columns);
-                output = "[SYSTEM] Succesfully created inventory '" + name + "'";
+                Boolean inventoryCreated = InventoryActions.create(name, rows, columns);
+
+                if (inventoryCreated) {
+                    output = "[SYSTEM] Succesfully created inventory '" + name + "'";
+                } else {
+                    output = "[ERROR] Inventory '" + name + "' already exists";
+                }
+                
                 break;
             }
             case "list": {

@@ -3,9 +3,7 @@ public class InventoryActions {
 
     public static boolean create(String name, int r, int c) {
         Inventory inv = new Inventory(r, c);
-        inventoryList.addInventory(name, inv);
-
-        return true;
+        return inventoryList.addInventory(name, inv);
     }
 
     public static String list() {
