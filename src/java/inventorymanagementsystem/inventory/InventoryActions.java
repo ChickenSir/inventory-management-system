@@ -17,34 +17,34 @@ public class InventoryActions {
         return output;
     }
 
-    public static String display(String name) throws InventoryRetrievalException {
+    public static String display(String name) throws InventoryAccessException {
         return inventoryList.getInventory(name).toString();
     }
 
-    public static boolean add(String name, String s) throws InventoryRetrievalException {
+    public static boolean add(String name, String s) throws InventoryAccessException {
         return inventoryList.getInventory(name).add(s);
     }
 
-    public static boolean add(String name, String s, int r, int c) throws InventoryRetrievalException {
+    public static boolean add(String name, String s, int r, int c) throws InventoryAccessException {
         return inventoryList.getInventory(name).add(s, r, c);
     }
 
-    public static String remove(String name, String s) throws InventoryRetrievalException {
+    public static String remove(String name, String s) throws InventoryAccessException {
         return inventoryList.getInventory(name).remove(s);
     }
 
-    public static boolean transfer(String from, String to, String s) throws InventoryRetrievalException {
+    public static boolean transfer(String from, String to, String s) throws InventoryAccessException {
         Inventory invFrom = inventoryList.getInventory(from);
         Inventory invTo = inventoryList.getInventory(to);
 
         return invTo.add(invFrom.remove(s));
     }
 
-    public static boolean delete(String name) throws InventoryRetrievalException {
+    public static boolean delete(String name) throws InventoryAccessException {
         return inventoryList.removeInventory(name);
     }
 
-    public static boolean clear(String name) throws InventoryRetrievalException {
+    public static boolean clear(String name) throws InventoryAccessException {
         Inventory inv = inventoryList.getInventory(name);
         if (inv == null) return false;
 
@@ -52,7 +52,7 @@ public class InventoryActions {
         return true;
     }
 
-    public static boolean fill(String name) throws InventoryRetrievalException {
+    public static boolean fill(String name) throws InventoryAccessException {
         Inventory inv = inventoryList.getInventory(name);
         if (inv == null) return false;
 

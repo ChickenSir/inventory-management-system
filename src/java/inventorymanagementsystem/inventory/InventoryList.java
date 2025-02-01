@@ -16,10 +16,10 @@ public class InventoryList {
         return instance;
     }
 
-    public Inventory getInventory(String name) throws InventoryRetrievalException {
+    public Inventory getInventory(String name) throws InventoryAccessException {
         Inventory inv = inventories.get(name);
 
-        if (inv == null) throw new InventoryRetrievalException(name);
+        if (inv == null) throw new InventoryAccessException(name);
 
         return inventories.get(name);
     }
@@ -33,10 +33,10 @@ public class InventoryList {
         return true;
     }
 
-    public boolean removeInventory(String name) throws InventoryRetrievalException {
+    public boolean removeInventory(String name) throws InventoryAccessException {
         Inventory inv = inventories.get(name);
 
-        if (inv == null) throw new InventoryRetrievalException(name);
+        if (inv == null) throw new InventoryAccessException(name);
 
         inventories.remove(name);
         return true;

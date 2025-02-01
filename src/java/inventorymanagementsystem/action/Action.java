@@ -2,10 +2,10 @@ package action;
 import java.util.List;
 
 import inventory.InventoryActions;
-import inventory.InventoryRetrievalException;
+import inventory.InventoryAccessException;
 
 public interface Action {
-    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException, InventoryRetrievalException;
+    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException, InventoryAccessException;
 }
 
 class ExitAction implements Action {
@@ -47,7 +47,7 @@ class ListAction implements Action {
 
 class InventoryAction implements Action {
     @Override
-    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException, InventoryRetrievalException {
+    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException, InventoryAccessException {
         if (args.size() < 1) {
             return "Inventory:\n"
                     + " - inventory create/list/display/add/remove/transfer/delete/clear/fill\n"

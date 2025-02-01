@@ -7,7 +7,7 @@ import action.Action;
 import action.ActionArgumentException;
 import action.ActionList;
 import action.InvalidArgumentException;
-import inventory.InventoryRetrievalException;
+import inventory.InventoryAccessException;
 
 public class InventoryManagementSystem {
     public static void main(String[] args) {
@@ -37,7 +37,7 @@ public class InventoryManagementSystem {
             } catch (InvalidArgumentException e) {
                 // Invalid argument types
                 System.out.println(e.getMessage());
-            } catch (InventoryRetrievalException e) {
+            } catch (InventoryAccessException e) {
                 // Inventory does not exist
                 System.out.println(e.getMessage());
             } catch (NullPointerException e) {
