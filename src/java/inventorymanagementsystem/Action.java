@@ -1,7 +1,7 @@
 import java.util.List;
 
 public interface Action {
-    public String run(List<String> args) throws ActionArgumentException;
+    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException;
 }
 
 class ExitAction implements Action {
@@ -42,7 +42,7 @@ class ListAction implements Action {
 
 class InventoryAction implements Action {
     @Override
-    public String run(List<String> args) throws ActionArgumentException {
+    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException {
         if (args.size() < 1) {
             throw new ActionArgumentException("inventory", 1);
         }
@@ -59,8 +59,16 @@ class InventoryAction implements Action {
                 }
 
                 // Create a new inventory
-                int rows = Integer.valueOf(args.get(1));
-                int columns = Integer.valueOf(args.get(2));
+                int rows;
+                int columns;
+
+                try {
+                    rows = Integer.valueOf(args.get(1));
+                    columns = Integer.valueOf(args.get(2));
+                } catch (NumberFormatException e) {
+                    throw new InvalidArgumentException("create");
+                }
+
                 String name;
                 if (args.size() == 4) {
                     name = args.get(3);
@@ -101,8 +109,15 @@ class InventoryAction implements Action {
                 if (args.size() == 3) {
                     added = InventoryActions.add(name, str);
                 } else {
-                    int row = Integer.valueOf(args.get(3));
-                    int column = Integer.valueOf(args.get(4));
+                    int row;
+                    int column;
+
+                    try {
+                        row = Integer.valueOf(args.get(3));
+                        column = Integer.valueOf(args.get(4));
+                    } catch (NumberFormatException e) {
+                        throw new InvalidArgumentException("add");
+                    }
 
                     added = InventoryActions.add(name, str, row, column);
                 }

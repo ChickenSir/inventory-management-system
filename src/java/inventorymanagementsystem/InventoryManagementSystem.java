@@ -26,6 +26,9 @@ public class InventoryManagementSystem {
             } catch (ActionArgumentException e) {
                 // Invalid action arguments
                 System.out.println(e.getMessage());
+            } catch (InvalidArgumentException e) {
+                // Invalid argument types
+                System.out.println(e.getMessage());
             } catch (NullPointerException e) {
                 System.out.println("[ERROR] Unknown action '" + action.get(0) + "'. Enter 'list' for a list of actions.");
             }
