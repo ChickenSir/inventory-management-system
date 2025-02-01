@@ -185,6 +185,8 @@ class InventoryAction implements Action {
                 output = "[SYSTEM] Filled '" + args.get(1) + "'";
                 break;
             }
+            default:
+                output = "[ERROR] Invalid argument '" + action + "'";
         }
 
         return output;
