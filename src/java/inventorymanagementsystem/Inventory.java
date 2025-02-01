@@ -60,6 +60,7 @@ public class Inventory {
                     
                     String temp = items[i][j];
                     items[i][j] = null;
+                    totalItems--;
                     return temp;
                 }
             }
