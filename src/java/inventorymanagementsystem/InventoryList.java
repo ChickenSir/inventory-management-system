@@ -22,4 +22,8 @@ public class InventoryList {
     public void addInventory(String name, Inventory inv) {
         inventories.put(name, inv);
     }
+
+    public HashMap<String, Inventory> getList() {
+        return inventories;
+    }
 }

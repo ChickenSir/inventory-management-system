@@ -30,12 +30,17 @@ class InventoryAction implements Action {
 
         switch (action) {
             case "create":
+                // Create a new inventory
                 int rows = Integer.valueOf(args.get(1));
                 int columns = Integer.valueOf(args.get(2));
                 String name = args.get(3);
 
                 InventoryActions.create(name, rows, columns);
                 output = "[SYSTEM] Succesfully created inventory";
+                break;
+            case "list":
+                output = InventoryActions.list();
+                break;
         }
 
         return output;
