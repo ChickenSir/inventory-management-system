@@ -17,4 +17,8 @@ public class InventoryActions {
 
         return output;
     }
+
+    public static String display(String name) {
+        return inventoryList.getInventory(name).toString();
+    }
 }

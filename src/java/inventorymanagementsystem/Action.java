@@ -30,7 +30,7 @@ class InventoryAction implements Action {
 
         switch (action) {
             case "create":
-                if (args.size() > 4) {
+                if (args.size() > 4 || args.size() < 3) {
                     throw new ActionArgumentException(action, 4);
                 }
 
@@ -45,14 +45,22 @@ class InventoryAction implements Action {
                 }
 
                 InventoryActions.create(name, rows, columns);
-                output = "[SYSTEM] Succesfully created inventory";
+                output = "[SYSTEM] Succesfully created inventory '" + name + "'";
                 break;
             case "list":
                 if (args.size() > 1) {
                     throw new ActionArgumentException(action, 0);
                 }
-                
+
                 output = InventoryActions.list();
+                break;
+            case "display":
+                if (args.size() != 2) {
+                    throw new ActionArgumentException(action, 1);
+                }
+
+                output += "[SYSTEM] Displaying " + args.get(1) + "\n";
+                output += InventoryActions.display(args.get(1));
                 break;
         }
 
