@@ -124,6 +124,15 @@ class InventoryAction implements Action {
 
                 break;
             }
+            case "clear":
+                if (args.size() != 2) {
+                    throw new ActionArgumentException(action, 0);
+                }
+
+                InventoryActions.clear(args.get(1));
+
+                output = "[SYSTEM] Cleared '" + args.get(1) + "'";
+                break;
         }
 
         return output;
