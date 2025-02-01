@@ -48,14 +48,15 @@ class InventoryAction implements Action {
                 output = "[SYSTEM] Succesfully created inventory '" + name + "'";
                 break;
             }
-            case "list":
+            case "list": {
                 if (args.size() > 1) {
                     throw new ActionArgumentException(action, 0);
                 }
 
                 output = InventoryActions.list();
                 break;
-            case "display":
+            }
+            case "display": {
                 if (args.size() != 2) {
                     throw new ActionArgumentException(action, 1);
                 }
@@ -63,6 +64,7 @@ class InventoryAction implements Action {
                 output += "[SYSTEM] Displaying " + args.get(1) + "\n";
                 output += InventoryActions.display(args.get(1));
                 break;
+            }
             case "add": {
                 if (args.size() < 3 || args.size() > 5) {
                     throw new ActionArgumentException(action, 2);
@@ -124,7 +126,7 @@ class InventoryAction implements Action {
 
                 break;
             }
-            case "clear":
+            case "clear": {
                 if (args.size() != 2) {
                     throw new ActionArgumentException(action, 1);
                 }
@@ -133,7 +135,8 @@ class InventoryAction implements Action {
 
                 output = "[SYSTEM] Cleared '" + args.get(1) + "'";
                 break;
-            case "fill":
+            }
+            case "fill": {
                 if (args.size() != 2) {
                     throw new ActionArgumentException(action, 1);
                 }
@@ -142,6 +145,7 @@ class InventoryAction implements Action {
 
                 output = "[SYSTEM] Filled '" + args.get(1) + "'";
                 break;
+            }
         }
 
         return output;
