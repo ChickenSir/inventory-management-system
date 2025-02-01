@@ -30,15 +30,28 @@ class InventoryAction implements Action {
 
         switch (action) {
             case "create":
+                if (args.size() > 4) {
+                    throw new ActionArgumentException(action, 4);
+                }
+
                 // Create a new inventory
                 int rows = Integer.valueOf(args.get(1));
                 int columns = Integer.valueOf(args.get(2));
-                String name = args.get(3);
+                String name;
+                if (args.size() == 4) {
+                    name = args.get(3);
+                } else {
+                    name = "Inventory" + (int)(Math.random() * 10000);
+                }
 
                 InventoryActions.create(name, rows, columns);
                 output = "[SYSTEM] Succesfully created inventory";
                 break;
             case "list":
+                if (args.size() > 1) {
+                    throw new ActionArgumentException(action, 0);
+                }
+                
                 output = InventoryActions.list();
                 break;
         }
