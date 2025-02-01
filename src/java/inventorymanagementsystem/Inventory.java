@@ -58,8 +58,9 @@ public class Inventory {
                     if (i < nextRow) nextRow = i;
                     if (j < nextColumn) nextColumn = j;
                     
+                    String temp = items[i][j];
                     items[i][j] = null;
-                    return items[i][j];
+                    return temp;
                 }
             }
         }

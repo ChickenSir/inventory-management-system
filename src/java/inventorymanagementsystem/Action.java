@@ -89,6 +89,23 @@ class InventoryAction implements Action {
 
                 break;
             }
+            case "remove": {
+                if (args.size() != 3) {
+                    throw new ActionArgumentException(action, 2);
+                }
+
+                String str = args.get(1);
+                String name = args.get(2);
+                String removed = InventoryActions.remove(name, str);
+
+                if (removed != null) {
+                    output = "[SYSTEM] Removed '" + str + "' from '" + name + "'";
+                } else {
+                    output = "[ERROR] String '" + str + "' not present in inventory '" + name + "'";
+                }
+
+                break;
+            }
         }
 
         return output;
