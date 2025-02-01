@@ -8,6 +8,8 @@ public class InventoryManagementSystem {
         Console console = System.console();
         ActionList actionList = ActionList.getInstance();
 
+        System.out.println("Type 'list' for a list of actions");
+
         while(true) {
             // Get input from the user
             System.out.print("> ");
