@@ -6,6 +6,7 @@ public class Inventory {
 
     private int nextRow = 0;
     private int nextColumn = 0;
+    private int totalItems = 0;
 
     public Inventory(int r, int c) {
         items = new String[r][c];
@@ -17,24 +18,41 @@ public class Inventory {
     public boolean add(String s) {
         if (isFull()) return false;
 
-        items[nextRow][nextColumn] = s;
-        if (nextColumn == columns - 1) nextRow++;
-        nextColumn = (nextColumn + 1) % columns;
+        if (items[nextRow][nextColumn] == null) {
+            items[nextRow][nextColumn] = s;
+            if (nextColumn == columns - 1) nextRow++;
+            nextColumn = (nextColumn + 1) % columns;
+        } else {
+            while (items[nextRow][nextColumn] != null) {
+                if (nextColumn == columns - 1) nextRow++;
+                nextColumn = (nextColumn + 1) % columns;
+            }
 
+            items[nextRow][nextColumn] = s;
+        }
+
+        totalItems++;
         return true;
     }
 
     public boolean add(String s, int r, int c) {
         if (isFull()) return false;
-        if (items[r][c] == null) return false;
+        if (items[r][c] != null) return false;
 
         items[r][c] = s;
+        totalItems++;
 
         return true;
     }
 
+    public void clear() {
+        items = new String[rows][columns];
+        nextRow = 0;
+        nextColumn = 0;
+    }
+
     public boolean isFull() {
-        return nextRow == rows;
+        return totalItems == size;
     }
 
     public String toString() {
