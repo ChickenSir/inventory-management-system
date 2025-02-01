@@ -16,43 +16,50 @@ public class InventoryActions {
         return output;
     }
 
-    public static String display(String name) {
+    public static String display(String name) throws InventoryRetrievalException {
         return inventoryList.getInventory(name).toString();
     }
 
-    public static boolean add(String name, String s) {
+    public static boolean add(String name, String s) throws InventoryRetrievalException {
         return inventoryList.getInventory(name).add(s);
     }
 
-    public static boolean add(String name, String s, int r, int c) {
+    public static boolean add(String name, String s, int r, int c) throws InventoryRetrievalException {
         return inventoryList.getInventory(name).add(s, r, c);
     }
 
-    public static String remove(String name, String s) {
+    public static String remove(String name, String s) throws InventoryRetrievalException {
         return inventoryList.getInventory(name).remove(s);
     }
 
-    public static boolean transfer(String from, String to, String s) {
+    public static boolean transfer(String from, String to, String s) throws InventoryRetrievalException {
         Inventory invFrom = inventoryList.getInventory(from);
         Inventory invTo = inventoryList.getInventory(to);
 
         return invTo.add(invFrom.remove(s));
     }
 
-    public static boolean delete(String name) {
+    public static boolean delete(String name) throws InventoryRetrievalException {
         return inventoryList.removeInventory(name);
     }
 
-    public static void clear(String name) {
+    public static boolean clear(String name) throws InventoryRetrievalException {
+        Inventory inv = inventoryList.getInventory(name);
+        if (inv == null) return false;
+
         inventoryList.getInventory(name).clear();
+        return true;
     }
 
-    public static void fill(String name) {
+    public static boolean fill(String name) throws InventoryRetrievalException {
         Inventory inv = inventoryList.getInventory(name);
+        if (inv == null) return false;
 
         for (int i = 0; i < inv.size; i++) {
             String random = "" + (int)(Math.random() * 1000);
             inv.add(random);
         }
+
+        return true;
     }
 }

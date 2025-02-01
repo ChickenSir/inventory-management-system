@@ -31,6 +31,9 @@ public class InventoryManagementSystem {
             } catch (InvalidArgumentException e) {
                 // Invalid argument types
                 System.out.println(e.getMessage());
+            } catch (InventoryRetrievalException e) {
+                // Inventory does not exist
+                System.out.println(e.getMessage());
             } catch (NullPointerException e) {
                 System.out.println("[ERROR] Unknown action '" + action.get(0) + "'. Enter 'list' for a list of actions.");
             }

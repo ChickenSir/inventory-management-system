@@ -15,12 +15,16 @@ public class InventoryList {
         return instance;
     }
 
-    public Inventory getInventory(String name) {
+    public Inventory getInventory(String name) throws InventoryRetrievalException {
+        Inventory inv = inventories.get(name);
+
+        if (inv == null) throw new InventoryRetrievalException(name);
+
         return inventories.get(name);
     }
 
     public boolean addInventory(String name, Inventory inv) {
-        Inventory inventory =  inventories.get(name);
+        Inventory inventory = inventories.get(name);
 
         if (inventory != null) return false;
 
@@ -28,10 +32,10 @@ public class InventoryList {
         return true;
     }
 
-    public boolean removeInventory(String name) {
+    public boolean removeInventory(String name) throws InventoryRetrievalException {
         Inventory inv = inventories.get(name);
 
-        if (inv == null) return false;
+        if (inv == null) throw new InventoryRetrievalException(name);
 
         inventories.remove(name);
         return true;

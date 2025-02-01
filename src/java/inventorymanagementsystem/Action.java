@@ -1,7 +1,7 @@
 import java.util.List;
 
 public interface Action {
-    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException;
+    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException, InventoryRetrievalException;
 }
 
 class ExitAction implements Action {
@@ -43,7 +43,7 @@ class ListAction implements Action {
 
 class InventoryAction implements Action {
     @Override
-    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException {
+    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException, InventoryRetrievalException {
         if (args.size() < 1) {
             return "Inventory:\n"
                     + " - inventory create/list/display/add/remove/transfer/delete/clear/fill\n"
@@ -187,13 +187,8 @@ class InventoryAction implements Action {
                     throw new ActionArgumentException(action, 1);
                 }
 
-                Boolean deleted = InventoryActions.delete(args.get(1));
-
-                if (deleted) {
-                    output = "[SYSTEM] Deleted inventory '" + args.get(1) + "'";
-                } else {
-                    output = "[ERROR] Inventory '" + args.get(1) + "' does not exist";
-                }
+                InventoryActions.delete(args.get(1));
+                output = "[SYSTEM] Deleted inventory '" + args.get(1) + "'";
 
                 break;
             }
@@ -203,8 +198,8 @@ class InventoryAction implements Action {
                 }
 
                 InventoryActions.clear(args.get(1));
-
                 output = "[SYSTEM] Cleared '" + args.get(1) + "'";
+
                 break;
             }
             case "fill": {
@@ -215,6 +210,7 @@ class InventoryAction implements Action {
                 InventoryActions.fill(args.get(1));
 
                 output = "[SYSTEM] Filled '" + args.get(1) + "'";
+
                 break;
             }
             default:
