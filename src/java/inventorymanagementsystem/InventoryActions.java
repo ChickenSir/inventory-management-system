@@ -44,4 +44,13 @@ public class InventoryActions {
     public static void clear(String name) {
         inventoryList.getInventory(name).clear();
     }
+
+    public static void fill(String name) {
+        Inventory inv = inventoryList.getInventory(name);
+
+        for (int i = 0; i < inv.size; i++) {
+            String random = "" + (int)(Math.random() * 1000);
+            inv.add(random);
+        }
+    }
 }
