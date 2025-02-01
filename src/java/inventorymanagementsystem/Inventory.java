@@ -10,4 +10,19 @@ public class Inventory {
         nextColumn = 0;
         size = rows * columns;
     }
+
+    public String toString() {
+        String output = "";
+
+        for(int i = 0; i < items.length; i++) {
+            for(int j = 0; j < items[i].length; j++) {
+                String item = (items[i][j] == null) ? "-" : "\"" + items[i][j] + "\"";
+                output += "[" + item + "] ";
+            }
+
+            output += "\n";
+        }
+
+        return output;
+    }
 }
