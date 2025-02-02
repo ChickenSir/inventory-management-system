@@ -9,6 +9,7 @@ import action.ActionList;
 import action.InvalidArgumentException;
 import inventory.DuplicateInventoryException;
 import inventory.InventoryAccessException;
+import inventory.StringAccessException;
 
 public class InventoryManagementSystem {
     public static void main(String[] args) {
@@ -32,11 +33,8 @@ public class InventoryManagementSystem {
             try {
                 // Run action from action list
                 System.out.println(actionType.run(actionArgs));
-            } catch (ActionArgumentException | InvalidArgumentException e) {
-                // Invalid action arguments
-                System.out.println(e.getMessage());
-            } catch (InventoryAccessException | DuplicateInventoryException e) {
-                // Inventory access exceptions
+            } catch (ActionArgumentException | InvalidArgumentException | InventoryAccessException | DuplicateInventoryException | StringAccessException e) {
+                // Display error messages
                 System.out.println(e.getMessage());
             } catch (NullPointerException e) {
                 System.out.println("[ERROR] Unknown action '" + action.get(0) + "'. Enter 'list' for a list of actions.");

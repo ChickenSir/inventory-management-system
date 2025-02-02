@@ -2,11 +2,12 @@ package action;
 import java.util.List;
 
 import inventory.InventoryActions;
+import inventory.StringAccessException;
 import inventory.DuplicateInventoryException;
 import inventory.InventoryAccessException;
 
 public interface Action {
-    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException, InventoryAccessException, DuplicateInventoryException;
+    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException, InventoryAccessException, DuplicateInventoryException, StringAccessException;
 }
 
 class ExitAction implements Action {
@@ -48,7 +49,7 @@ class ListAction implements Action {
 
 class InventoryAction implements Action {
     @Override
-    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException, InventoryAccessException, DuplicateInventoryException {
+    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException, InventoryAccessException, DuplicateInventoryException, StringAccessException {
         if (args.size() < 1) {
             return "Inventory:\n"
                     + " - inventory create/list/display/add/remove/transfer/delete/clear/fill\n"
@@ -154,13 +155,8 @@ class InventoryAction implements Action {
 
                 String str = args.get(1);
                 String name = args.get(2);
-                String removed = InventoryActions.remove(name, str);
-
-                if (removed != null) {
-                    output = "[SYSTEM] Removed '" + str + "' from '" + name + "'";
-                } else {
-                    output = "[ERROR] String '" + str + "' not present in inventory '" + name + "'";
-                }
+                InventoryActions.remove(name, str);
+                output = "[SYSTEM] Removed '" + str + "' from '" + name + "'";
 
                 break;
             }
@@ -172,13 +168,8 @@ class InventoryAction implements Action {
                 String from = args.get(1);
                 String to = args.get(2);
                 String str = args.get(3);
-                Boolean transferred = InventoryActions.transfer(from, to, str);
-
-                if (transferred) {
-                    output = "[SYSTEM] Tranferred '" + str + "' from '" + from + "' to '" + to + "'"; 
-                } else {
-                    output = "[ERROR] Cannot transfer '" + str + "'";
-                }
+                InventoryActions.transfer(from, to, str);
+                output = "[SYSTEM] Tranferred '" + str + "' from '" + from + "' to '" + to + "'"; 
 
                 break;
             }

@@ -29,8 +29,11 @@ public class InventoryActions {
         return inventoryList.getInventory(name).add(s, r, c);
     }
 
-    public static String remove(String name, String s) throws InventoryAccessException {
-        return inventoryList.getInventory(name).remove(s);
+    public static String remove(String name, String s) throws InventoryAccessException, StringAccessException {
+        String removed = inventoryList.getInventory(name).remove(s);
+        if (removed == null) throw new StringAccessException(name, s);
+
+        return removed;
     }
 
     public static boolean transfer(String from, String to, String s) throws InventoryAccessException {
