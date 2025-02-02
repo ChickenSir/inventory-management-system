@@ -2,9 +2,9 @@ package inventory;
 public class InventoryActions {
     private static InventoryList inventoryList = InventoryList.getInstance();
 
-    public static boolean create(String name, int r, int c) throws DuplicateInventoryException {
+    public static void create(String name, int r, int c) throws DuplicateInventoryException {
         Inventory inv = new Inventory(r, c);
-        return inventoryList.addInventory(name, inv);
+        inventoryList.addInventory(name, inv);
     }
 
     public static String list() {
@@ -50,27 +50,24 @@ public class InventoryActions {
         }
     }
 
-    public static boolean delete(String name) throws InventoryAccessException {
-        return inventoryList.removeInventory(name);
+    public static void delete(String name) throws InventoryAccessException {
+        inventoryList.removeInventory(name);
     }
 
-    public static boolean clear(String name) throws InventoryAccessException {
+    public static void clear(String name) throws InventoryAccessException {
         Inventory inv = inventoryList.getInventory(name);
-        if (inv == null) return false;
+        if (!inv.isFull()) throw new InventoryAccessException(name, "is empty");
 
-        inventoryList.getInventory(name).clear();
-        return true;
+        inv.clear();
     }
 
-    public static boolean fill(String name) throws InventoryAccessException {
+    public static void fill(String name) throws InventoryAccessException {
         Inventory inv = inventoryList.getInventory(name);
-        if (inv == null) return false;
+        if (inv.isFull()) throw new InventoryAccessException(name, "is full");
 
         for (int i = 0; i < inv.size; i++) {
             String random = "" + (int)(Math.random() * 1000);
             inv.add(random);
         }
-
-        return true;
     }
 }
