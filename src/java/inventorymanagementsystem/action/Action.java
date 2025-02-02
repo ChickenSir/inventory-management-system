@@ -122,10 +122,9 @@ class InventoryAction implements Action {
 
                 String name = args.get(2);
                 String str = args.get(1);
-                Boolean added;
 
                 if (args.size() == 3) {
-                    added = InventoryActions.add(name, str);
+                    InventoryActions.add(name, str);
                 } else {
                     int row;
                     int column;
@@ -137,14 +136,10 @@ class InventoryAction implements Action {
                         throw new InvalidArgumentException("add");
                     }
 
-                    added = InventoryActions.add(name, str, row, column);
+                    InventoryActions.add(name, str, row, column);
                 }
 
-                if (added) {
-                    output = "[SYSTEM] Added '" + str + "' to '" + name + "' ";
-                } else {
-                    output = "[ERROR] Inventory '" + name + "' is full or slot is occupied";
-                }
+                output = "[SYSTEM] Added '" + str + "' to '" + name + "' ";
 
                 break;
             }

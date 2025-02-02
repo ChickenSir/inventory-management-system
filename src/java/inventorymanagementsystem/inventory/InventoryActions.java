@@ -22,11 +22,17 @@ public class InventoryActions {
     }
 
     public static boolean add(String name, String s) throws InventoryAccessException {
-        return inventoryList.getInventory(name).add(s);
+        Boolean added = inventoryList.getInventory(name).add(s);
+        if (!added) throw new InventoryAccessException(name, "is full");
+
+        return added;
     }
 
     public static boolean add(String name, String s, int r, int c) throws InventoryAccessException {
-        return inventoryList.getInventory(name).add(s, r, c);
+        Boolean added = inventoryList.getInventory(name).add(s, r, c);
+        if (!added) throw new InventoryAccessException(name, "is full");
+
+        return added;
     }
 
     public static String remove(String name, String s) throws InventoryAccessException, StringAccessException {
@@ -39,10 +45,8 @@ public class InventoryActions {
     public static boolean transfer(String from, String to, String s) throws InventoryAccessException {
         Inventory invFrom = inventoryList.getInventory(from);
         Inventory invTo = inventoryList.getInventory(to);
-        Boolean added = invTo.add(invFrom.remove(s));
-        if (!added) throw new InventoryAccessException(to, "is full");
 
-        return added;
+        return invTo.add(invFrom.remove(s));
     }
 
     public static boolean delete(String name) throws InventoryAccessException {
