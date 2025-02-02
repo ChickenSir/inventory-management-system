@@ -21,32 +21,33 @@ public class InventoryActions {
         return inventoryList.getInventory(name).toString();
     }
 
-    public static boolean add(String name, String s) throws InventoryAccessException {
+    public static void add(String name, String s) throws InventoryAccessException {
         Boolean added = inventoryList.getInventory(name).add(s);
         if (!added) throw new InventoryAccessException(name, "is full");
-
-        return added;
     }
 
-    public static boolean add(String name, String s, int r, int c) throws InventoryAccessException {
+    public static void add(String name, String s, int r, int c) throws InventoryAccessException {
         Boolean added = inventoryList.getInventory(name).add(s, r, c);
         if (!added) throw new InventoryAccessException(name, "is full");
-
-        return added;
     }
 
-    public static String remove(String name, String s) throws InventoryAccessException, StringAccessException {
+    public static void remove(String name, String s) throws InventoryAccessException, StringAccessException {
         String removed = inventoryList.getInventory(name).remove(s);
         if (removed == null) throw new StringAccessException(name, s);
-
-        return removed;
     }
 
-    public static boolean transfer(String from, String to, String s) throws InventoryAccessException {
+    public static void transfer(String from, String to, String s) throws InventoryAccessException, StringAccessException {
         Inventory invFrom = inventoryList.getInventory(from);
         Inventory invTo = inventoryList.getInventory(to);
 
-        return invTo.add(invFrom.remove(s));
+        if (!invTo.isFull()) {
+            String removed = invFrom.remove(s);
+            if (removed == null) throw new StringAccessException(from, s);
+
+            invTo.add(removed);
+        } else {
+            throw new InventoryAccessException(to, "is full");
+        }
     }
 
     public static boolean delete(String name) throws InventoryAccessException {

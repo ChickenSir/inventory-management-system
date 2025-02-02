@@ -74,6 +74,7 @@ public class Inventory {
         items = new String[rows][columns];
         nextRow = 0;
         nextColumn = 0;
+        totalItems = 0;
     }
 
     public boolean isFull() {
