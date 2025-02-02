@@ -26,7 +26,7 @@ class ListAction implements Action {
     @Override
     public String run(List<String> args) throws ActionArgumentException {
         if (args.size() != 0) {
-            throw new ActionArgumentException("exit", 0);
+            throw new ActionArgumentException("list", 0);
         }
 
         // Display list of all actions with a description
