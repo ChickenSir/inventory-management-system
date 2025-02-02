@@ -74,7 +74,7 @@ class InventoryAction implements Action {
         switch (action) {
             case "create": {
                 if (args.size() > 4 || args.size() < 3) {
-                    throw new ActionArgumentException(action, 4);
+                    throw new ActionArgumentException(action, 3);
                 }
 
                 int rows;
@@ -125,7 +125,7 @@ class InventoryAction implements Action {
             }
             case "add": {
                 if (args.size() < 3 || args.size() > 5) {
-                    throw new ActionArgumentException(action, 2);
+                    throw new ActionArgumentException(action, 4);
                 }
 
                 // Get name and string from arguments
