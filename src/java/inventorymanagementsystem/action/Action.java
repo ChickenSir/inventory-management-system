@@ -2,10 +2,11 @@ package action;
 import java.util.List;
 
 import inventory.InventoryActions;
+import inventory.DuplicateInventoryException;
 import inventory.InventoryAccessException;
 
 public interface Action {
-    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException, InventoryAccessException;
+    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException, InventoryAccessException, DuplicateInventoryException;
 }
 
 class ExitAction implements Action {
@@ -47,7 +48,7 @@ class ListAction implements Action {
 
 class InventoryAction implements Action {
     @Override
-    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException, InventoryAccessException {
+    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException, InventoryAccessException, DuplicateInventoryException {
         if (args.size() < 1) {
             return "Inventory:\n"
                     + " - inventory create/list/display/add/remove/transfer/delete/clear/fill\n"
@@ -91,13 +92,8 @@ class InventoryAction implements Action {
                     name = "Inventory" + (int)(Math.random() * 10000);
                 }
 
-                Boolean inventoryCreated = InventoryActions.create(name, rows, columns);
-
-                if (inventoryCreated) {
-                    output = "[SYSTEM] Succesfully created inventory '" + name + "'";
-                } else {
-                    output = "[ERROR] Inventory '" + name + "' already exists";
-                }
+                InventoryActions.create(name, rows, columns);
+                output = "[SYSTEM] Succesfully created inventory '" + name + "'";
                 
                 break;
             }

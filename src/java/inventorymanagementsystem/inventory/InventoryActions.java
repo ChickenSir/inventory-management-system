@@ -2,7 +2,7 @@ package inventory;
 public class InventoryActions {
     private static InventoryList inventoryList = InventoryList.getInstance();
 
-    public static boolean create(String name, int r, int c) {
+    public static boolean create(String name, int r, int c) throws DuplicateInventoryException {
         Inventory inv = new Inventory(r, c);
         return inventoryList.addInventory(name, inv);
     }

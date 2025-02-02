@@ -24,10 +24,10 @@ public class InventoryList {
         return inventories.get(name);
     }
 
-    public boolean addInventory(String name, Inventory inv) {
+    public boolean addInventory(String name, Inventory inv) throws DuplicateInventoryException {
         Inventory inventory = inventories.get(name);
 
-        if (inventory != null) return false;
+        if (inventory != null) throw new DuplicateInventoryException(name);
 
         inventories.put(name, inv);
         return true;

@@ -7,6 +7,7 @@ import action.Action;
 import action.ActionArgumentException;
 import action.ActionList;
 import action.InvalidArgumentException;
+import inventory.DuplicateInventoryException;
 import inventory.InventoryAccessException;
 
 public class InventoryManagementSystem {
@@ -31,14 +32,11 @@ public class InventoryManagementSystem {
             try {
                 // Run action from action list
                 System.out.println(actionType.run(actionArgs));
-            } catch (ActionArgumentException e) {
+            } catch (ActionArgumentException | InvalidArgumentException e) {
                 // Invalid action arguments
                 System.out.println(e.getMessage());
-            } catch (InvalidArgumentException e) {
-                // Invalid argument types
-                System.out.println(e.getMessage());
-            } catch (InventoryAccessException e) {
-                // Inventory does not exist
+            } catch (InventoryAccessException | DuplicateInventoryException e) {
+                // Inventory access exceptions
                 System.out.println(e.getMessage());
             } catch (NullPointerException e) {
                 System.out.println("[ERROR] Unknown action '" + action.get(0) + "'. Enter 'list' for a list of actions.");
