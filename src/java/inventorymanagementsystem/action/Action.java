@@ -63,7 +63,7 @@ class InventoryAction implements Action {
                     + " - inventory transfer from to string\n"
                     + " - inventory delete name\n"
                     + " - inventory clear name\n"
-                    + " - inventory fill name\n";
+                    + " - inventory fill name";
         }
 
         // Get the first argument from the action
