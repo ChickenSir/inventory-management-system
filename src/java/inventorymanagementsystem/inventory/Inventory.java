@@ -71,6 +71,7 @@ public class Inventory {
     }
 
     public void clear() {
+        // Clear the contents of inventory and reset field values
         items = new String[rows][columns];
         nextRow = 0;
         nextColumn = 0;

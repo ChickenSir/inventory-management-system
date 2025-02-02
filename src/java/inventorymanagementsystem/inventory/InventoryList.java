@@ -17,6 +17,7 @@ public class InventoryList {
     }
 
     public Inventory getInventory(String name) throws InventoryAccessException {
+        // Get inventory from inventory list if present
         Inventory inv = inventories.get(name);
 
         if (inv == null) throw new InventoryAccessException(name, "does not exist");
@@ -25,6 +26,7 @@ public class InventoryList {
     }
 
     public boolean addInventory(String name, Inventory inv) throws DuplicateInventoryException {
+        // Add inventory to inventory list if it is not already present
         Inventory inventory = inventories.get(name);
 
         if (inventory != null) throw new DuplicateInventoryException(name);
@@ -34,6 +36,7 @@ public class InventoryList {
     }
 
     public boolean removeInventory(String name) throws InventoryAccessException {
+        // Remove inventory from inventory list if it is present
         Inventory inv = inventories.get(name);
 
         if (inv == null) throw new InventoryAccessException(name, "does not exist");

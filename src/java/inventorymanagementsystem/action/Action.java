@@ -29,6 +29,7 @@ class ListAction implements Action {
             throw new ActionArgumentException("exit", 0);
         }
 
+        // Display list of all actions with a description
         String output = "=====[List of Actions]=====\n\n"
             + " - list: Lists all actions\n"
             + " - inventory/inv\n"
@@ -51,6 +52,7 @@ class InventoryAction implements Action {
     @Override
     public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException, InventoryAccessException, DuplicateInventoryException, StringAccessException {
         if (args.size() < 1) {
+            // Display action details if not arguments are given
             return "Inventory:\n"
                     + " - inventory create/list/display/add/remove/transfer/delete/clear/fill\n"
                     + " - inventory create rows columns name\n"
@@ -75,24 +77,28 @@ class InventoryAction implements Action {
                     throw new ActionArgumentException(action, 4);
                 }
 
-                // Create a new inventory
                 int rows;
                 int columns;
 
                 try {
+                    // Get rows and column values from arguments
                     rows = Integer.valueOf(args.get(1));
                     columns = Integer.valueOf(args.get(2));
                 } catch (NumberFormatException e) {
+                    // Values are an invalid type
                     throw new InvalidArgumentException("create");
                 }
 
                 String name;
                 if (args.size() == 4) {
+                    // Get name from arguments
                     name = args.get(3);
                 } else {
+                    // Generate random name if no name is given
                     name = "Inventory" + (int)(Math.random() * 10000);
                 }
 
+                // Create the new inventory
                 InventoryActions.create(name, rows, columns);
                 output = "[SYSTEM] Succesfully created inventory '" + name + "'";
                 
@@ -103,6 +109,7 @@ class InventoryAction implements Action {
                     throw new ActionArgumentException(action, 0);
                 }
 
+                // List all inventories
                 output = InventoryActions.list();
                 break;
             }
@@ -111,6 +118,7 @@ class InventoryAction implements Action {
                     throw new ActionArgumentException(action, 1);
                 }
 
+                // Display contents of inventory
                 output += "[SYSTEM] Displaying " + args.get(1) + "\n";
                 output += InventoryActions.display(args.get(1));
                 break;
@@ -120,22 +128,27 @@ class InventoryAction implements Action {
                     throw new ActionArgumentException(action, 2);
                 }
 
+                // Get name and string from arguments
                 String name = args.get(2);
                 String str = args.get(1);
 
                 if (args.size() == 3) {
+                    // Add string to current available slot
                     InventoryActions.add(name, str);
                 } else {
                     int row;
                     int column;
 
                     try {
+                        // Get row and column values from arguments if present
                         row = Integer.valueOf(args.get(3));
                         column = Integer.valueOf(args.get(4));
                     } catch (NumberFormatException e) {
+                        // Values are an invalid type
                         throw new InvalidArgumentException("add");
                     }
 
+                    // Add the string to the inventory
                     InventoryActions.add(name, str, row, column);
                 }
 
@@ -148,8 +161,11 @@ class InventoryAction implements Action {
                     throw new ActionArgumentException(action, 2);
                 }
 
+                // Get name and string from arguments
                 String str = args.get(1);
                 String name = args.get(2);
+
+                // Remove the string from the inventory
                 InventoryActions.remove(name, str);
                 output = "[SYSTEM] Removed '" + str + "' from '" + name + "'";
 
@@ -160,9 +176,12 @@ class InventoryAction implements Action {
                     throw new ActionArgumentException(action, 3);
                 }
 
+                // Get names of inventories and string from arguments
                 String from = args.get(1);
                 String to = args.get(2);
                 String str = args.get(3);
+
+                // Transfer string from first inventory to second inventory
                 InventoryActions.transfer(from, to, str);
                 output = "[SYSTEM] Tranferred '" + str + "' from '" + from + "' to '" + to + "'"; 
 
@@ -173,6 +192,7 @@ class InventoryAction implements Action {
                     throw new ActionArgumentException(action, 1);
                 }
 
+                // Delete the specified inventory
                 InventoryActions.delete(args.get(1));
                 output = "[SYSTEM] Deleted inventory '" + args.get(1) + "'";
 
@@ -183,6 +203,7 @@ class InventoryAction implements Action {
                     throw new ActionArgumentException(action, 1);
                 }
 
+                // Clear the specified inventory
                 InventoryActions.clear(args.get(1));
                 output = "[SYSTEM] Cleared '" + args.get(1) + "'";
 
@@ -193,8 +214,8 @@ class InventoryAction implements Action {
                     throw new ActionArgumentException(action, 1);
                 }
 
+                // Fill the specified inventory
                 InventoryActions.fill(args.get(1));
-
                 output = "[SYSTEM] Filled '" + args.get(1) + "'";
 
                 break;
