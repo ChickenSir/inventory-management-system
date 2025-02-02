@@ -39,8 +39,10 @@ public class InventoryActions {
     public static boolean transfer(String from, String to, String s) throws InventoryAccessException {
         Inventory invFrom = inventoryList.getInventory(from);
         Inventory invTo = inventoryList.getInventory(to);
+        Boolean added = invTo.add(invFrom.remove(s));
+        if (!added) throw new InventoryAccessException(to, "is full");
 
-        return invTo.add(invFrom.remove(s));
+        return added;
     }
 
     public static boolean delete(String name) throws InventoryAccessException {

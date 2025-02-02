@@ -19,7 +19,7 @@ public class InventoryList {
     public Inventory getInventory(String name) throws InventoryAccessException {
         Inventory inv = inventories.get(name);
 
-        if (inv == null) throw new InventoryAccessException(name);
+        if (inv == null) throw new InventoryAccessException(name, "does not exist");
 
         return inventories.get(name);
     }
@@ -36,7 +36,7 @@ public class InventoryList {
     public boolean removeInventory(String name) throws InventoryAccessException {
         Inventory inv = inventories.get(name);
 
-        if (inv == null) throw new InventoryAccessException(name);
+        if (inv == null) throw new InventoryAccessException(name, "does not exist");
 
         inventories.remove(name);
         return true;
