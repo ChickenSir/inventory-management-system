@@ -31,7 +31,7 @@ class ListAction implements Action {
 
         String output = "=====[List of Actions]=====\n\n"
             + " - list: Lists all actions\n"
-            + " - inventory\n"
+            + " - inventory/inv\n"
             + "    - create: Create an inventory with a specified size and name\n"
             + "    - list: List all inventories\n"
             + "    - display: Display the contents of an inventory\n"
