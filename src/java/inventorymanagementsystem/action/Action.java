@@ -55,10 +55,10 @@ class InventoryAction implements Action {
             // Display action details if not arguments are given
             return "Inventory:\n"
                     + " - inventory create/list/display/add/remove/transfer/delete/clear/fill\n"
-                    + " - inventory create rows columns name\n"
+                    + " - inventory create rows columns (optional: name)\n"
                     + " - inventory list\n"
                     + " - inventory display name\n"
-                    + " - inventory add string name\n"
+                    + " - inventory add string name (optional: row, column)\n"
                     + " - inventory remove string name\n"
                     + " - inventory transfer from to string\n"
                     + " - inventory delete name\n"
