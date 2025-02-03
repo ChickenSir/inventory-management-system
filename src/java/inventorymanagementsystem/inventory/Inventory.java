@@ -82,6 +82,10 @@ public class Inventory {
         return totalItems == size;
     }
 
+    public boolean isEmpty() {
+        return totalItems == 0;
+    }
+
     public String toString() {
         String output = "";
 

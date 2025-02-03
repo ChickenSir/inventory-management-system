@@ -67,7 +67,7 @@ public class InventoryActions {
     public static void clear(String name) throws InventoryAccessException {
         // Clear an inventory if it is not empty
         Inventory inv = inventoryList.getInventory(name);
-        if (!inv.isFull()) throw new InventoryAccessException(name, "is empty");
+        if (inv.isEmpty()) throw new InventoryAccessException(name, "is empty");
 
         inv.clear();
     }
