@@ -7,7 +7,6 @@ import action.Action;
 import action.ActionArgumentException;
 import action.ActionList;
 import action.InvalidArgumentException;
-import inventory.DuplicateInventoryException;
 import inventory.InventoryAccessException;
 import inventory.StringAccessException;
 
@@ -33,7 +32,7 @@ public class InventoryManagementSystem {
             try {
                 // Run action from action list
                 System.out.println(actionType.run(actionArgs));
-            } catch (ActionArgumentException | InvalidArgumentException | InventoryAccessException | DuplicateInventoryException | StringAccessException e) {
+            } catch (ActionArgumentException | InvalidArgumentException | InventoryAccessException | StringAccessException e) {
                 // Display error messages
                 System.out.println(e.getMessage());
             } catch (NullPointerException e) {

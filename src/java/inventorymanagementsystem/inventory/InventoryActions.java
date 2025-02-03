@@ -2,7 +2,7 @@ package inventory;
 public class InventoryActions {
     private static InventoryList inventoryList = InventoryList.getInstance();
 
-    public static void create(String name, int r, int c) throws DuplicateInventoryException {
+    public static void create(String name, int r, int c) throws InventoryAccessException {
         // Create an inventory of specified size and add it to the inventory list
         Inventory inv = new Inventory(r, c);
         inventoryList.addInventory(name, inv);

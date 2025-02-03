@@ -25,11 +25,11 @@ public class InventoryList {
         return inventories.get(name);
     }
 
-    public boolean addInventory(String name, Inventory inv) throws DuplicateInventoryException {
+    public boolean addInventory(String name, Inventory inv) throws InventoryAccessException {
         // Add inventory to inventory list if it is not already present
         Inventory inventory = inventories.get(name);
 
-        if (inventory != null) throw new DuplicateInventoryException(name);
+        if (inventory != null) throw new InventoryAccessException(name, "already exists");
 
         inventories.put(name, inv);
         return true;

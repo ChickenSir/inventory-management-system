@@ -3,11 +3,10 @@ import java.util.List;
 
 import inventory.InventoryActions;
 import inventory.StringAccessException;
-import inventory.DuplicateInventoryException;
 import inventory.InventoryAccessException;
 
 public interface Action {
-    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException, InventoryAccessException, DuplicateInventoryException, StringAccessException;
+    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException, InventoryAccessException, StringAccessException;
 }
 
 class ExitAction implements Action {
@@ -50,7 +49,7 @@ class ListAction implements Action {
 
 class InventoryAction implements Action {
     @Override
-    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException, InventoryAccessException, DuplicateInventoryException, StringAccessException {
+    public String run(List<String> args) throws ActionArgumentException, InvalidArgumentException, InventoryAccessException, StringAccessException {
         if (args.size() < 1) {
             // Display action details if not arguments are given
             return "Inventory:\n"
