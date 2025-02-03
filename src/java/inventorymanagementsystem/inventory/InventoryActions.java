@@ -33,7 +33,7 @@ public class InventoryActions {
     public static void add(String name, String s, int r, int c) throws InventoryAccessException {
         // Add string to inventory at specified slot if not full
         Boolean added = inventoryList.getInventory(name).add(s, r, c);
-        if (!added) throw new InventoryAccessException(name, "is full");
+        if (!added) throw new InventoryAccessException(name, "is full or slot is occupied");
     }
 
     public static void remove(String name, String s) throws InventoryAccessException, StringAccessException {
